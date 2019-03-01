@@ -78,7 +78,10 @@ class Login extends React.Component {
       name: null,
       username: null
     };
+    window.alert("Yap, Zeile 81 in Login js");
   }
+
+
   /**
    * HTTP POST request is sent to the backend.
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
@@ -109,6 +112,7 @@ class Login extends React.Component {
           alert(`Something went wrong during the login: ${err.message}`);
         }
       });
+    window.alert("Und noch Zeile 115 in der login() Routine");
   }
 
   /**
