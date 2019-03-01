@@ -78,7 +78,7 @@ class Login extends React.Component {
       name: null,
       username: null
     };
-    window.alert("Yap, Zeile 81 in Login js");
+    window.alert("Alert geändert 09:32. Zeile 81 im Login.js.");
   }
 
 
