@@ -76,9 +76,11 @@ class Login extends React.Component {
     super();
     this.state = {
       name: null,
-      username: null
+      username: null,
+      colour: null,
+      zahl: null
     };
-    window.alert("Alert geändert 09:32. Zeile 81 im Login.js.");
+    window.alert("Alert geändert 1.3.10:52. Zeile 81 im Login.js.");
   }
 
 
@@ -94,7 +96,10 @@ class Login extends React.Component {
       },
       body: JSON.stringify({
         username: this.state.username,
-        name: this.state.name
+        name: this.state.name,
+        colour: this.state.colour,
+        zahl: this.state.zahl
+
       })
     })
       .then(response => response.json())
@@ -112,7 +117,6 @@ class Login extends React.Component {
           alert(`Something went wrong during the login: ${err.message}`);
         }
       });
-    window.alert("Und noch Zeile 115 in der login() Routine");
   }
 
   /**
@@ -153,6 +157,20 @@ class Login extends React.Component {
               onChange={e => {
                 this.handleInputChange("name", e.target.value);
               }}
+            />
+            <Label>Colour</Label>
+            <InputField
+                placeholder="Enter colour here.."
+                onChange={e => {
+                    this.handleInputChange("colour", e.target.value);
+                }}
+            />
+            <Label>Zahl</Label>
+            <InputField
+                placeholder="Enter number here.."
+                onChange={e => {
+                  this.handleInputChange("zahl", e.target.value);
+                }}
             />
             <ButtonContainer>
               <Button

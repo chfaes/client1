@@ -21,6 +21,16 @@ const Name = styled.div`
   color: #06c4ff;
 `;
 
+const Colour = styled.div`
+  font-weight: bold;
+  color: #d5051e;
+`;
+
+const Zahl = styled.div`
+  font-weight: bold;
+  color: #fecdde;
+`;
+
 const Id = styled.div`
   margin-left: auto;
   margin-right: 10px;
@@ -38,7 +48,7 @@ const Id = styled.div`
 const Player = ({ user }) => {
   return (
     <Container>
-      <Name>{user.name}</Name> <UserName>{user.username}</UserName>
+      <Name>{user.name}</Name> <UserName>{user.username}</UserName> <Colour>{user.colour}</Colour> <Zahl>{user.zahl}</Zahl>
       <Id>Id: {user.id}</Id>
     </Container>
   );
