@@ -4,10 +4,8 @@
 class User {
   constructor(data = {}) {
     this.id = null;
-    this.name = null;
     this.username = null;
-    this.colour = null;
-    this.zahl = null;
+    this.password = null;
     this.token = null;
     this.status = null;
     this.games = null;

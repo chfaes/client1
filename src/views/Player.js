@@ -16,19 +16,9 @@ const UserName = styled.div`
   margin-left: 5px;
 `;
 
-const Name = styled.div`
+const Password = styled.div`
   font-weight: bold;
   color: #06c4ff;
-`;
-
-const Colour = styled.div`
-  font-weight: bold;
-  color: #d5051e;
-`;
-
-const Zahl = styled.div`
-  font-weight: bold;
-  color: #fecdde;
 `;
 
 const Id = styled.div`
@@ -48,7 +38,7 @@ const Id = styled.div`
 const Player = ({ user }) => {
   return (
     <Container>
-      <Name>{user.name}</Name> <UserName>{user.username}</UserName> <Colour>{user.colour}</Colour> <Zahl>{user.zahl}</Zahl>
+      <Password>{user.password}</Password> <UserName>{user.username}</UserName>
       <Id>Id: {user.id}</Id>
     </Container>
   );
