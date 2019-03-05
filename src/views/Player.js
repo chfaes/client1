@@ -21,6 +21,11 @@ const Password = styled.div`
   color: #06c4ff;
 `;
 
+const CurrDate = styled.div`
+  font-weight: bold;
+  color: #e6ca1f;
+`;
+
 const Id = styled.div`
   margin-left: auto;
   margin-right: 10px;
@@ -38,7 +43,7 @@ const Id = styled.div`
 const Player = ({ user }) => {
   return (
     <Container>
-      <Password>{user.password}</Password> <UserName>{user.username}</UserName>
+      <Password>{user.password}</Password> <UserName>{user.username}</UserName> <CurrDate>{user.currdate}</CurrDate><CurrDate>{user.birthday}</CurrDate>
       <Id>Id: {user.id}</Id>
     </Container>
   );

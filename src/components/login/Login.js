@@ -65,6 +65,7 @@ const ButtonContainer = styled.div`
  * https://reactjs.org/docs/react-component.html
  * @Class
  */
+
 class Login extends React.Component {
   /**
    * If you don’t initialize the state and you don’t bind methods, you don’t need to implement a constructor for your React component.
@@ -77,8 +78,9 @@ class Login extends React.Component {
     this.state = {
       username: null,
       password: null,
+      currdate: null,
+      birthday: null,
     };
-    window.alert("Alert geändert 1.3.10:52. Zeile 81 im Login.js.");
   }
 
 
@@ -86,6 +88,10 @@ class Login extends React.Component {
    * HTTP POST request is sent to the backend.
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
+  register(){
+    this.props.history.push(`/My Components`);
+  }
+
   login() {
     fetch(`${getDomain()}/users`, {
       method: "POST",
@@ -95,7 +101,8 @@ class Login extends React.Component {
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password,
-
+        currdate: this.renderDate(),
+        birthday: this.state.birthday
       })
     })
       .then(response => response.json())
@@ -135,6 +142,10 @@ class Login extends React.Component {
    */
   componentDidMount() {}
 
+  renderDate(){
+    return new Date().toLocaleString()
+  }
+
   render() {
     return (
       <BaseContainer>
@@ -163,6 +174,14 @@ class Login extends React.Component {
                 }}
               >
                 Login
+              </Button>
+              <Button
+                  width="50%"
+                  onClick={() => {
+                    this.register();
+                  }}
+              >
+                Register New User
               </Button>
             </ButtonContainer>
           </Form>
