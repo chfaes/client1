@@ -78,8 +78,6 @@ class Login extends React.Component {
     this.state = {
       username: null,
       password: null,
-      currdate: null,
-      birthday: null,
     };
   }
 
@@ -93,7 +91,7 @@ class Login extends React.Component {
   }
 
   login() {
-    fetch(`${getDomain()}/users`, {
+    fetch(`${getDomain()}/logcheck`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -101,17 +99,19 @@ class Login extends React.Component {
       body: JSON.stringify({
         username: this.state.username,
         password: this.state.password,
-        currdate: this.renderDate(),
-        birthday: this.state.birthday
+        birthday: "Blank",
+        currdate: "Blank",
       })
     })
       .then(response => response.json())
-      .then(returnedUser => {
-        const user = new User(returnedUser);
-        // store the token into the local storage
-        localStorage.setItem("token", user.token);
-        // user login successfully worked --> navigate to the route /game in the GameRouter
-        this.props.history.push(`/game`);
+      .then(res => {
+        if(res.status ===409){
+          window.alert("Username oder Passwort falsch!");
+        }else{
+          const user = new User(res);
+          localStorage.setItem("token", user.token);
+          this.props.history.push(`/game`);
+        }
       })
       .catch(err => {
         if (err.message.match(/Failed to fetch/)) {
@@ -120,6 +120,7 @@ class Login extends React.Component {
           alert(`Something went wrong during the login: ${err.message}`);
         }
       });
+
   }
 
   /**
@@ -141,10 +142,6 @@ class Login extends React.Component {
    * It will trigger an extra rendering, but it will happen before the browser updates the screen.
    */
   componentDidMount() {}
-
-  renderDate(){
-    return new Date().toLocaleString()
-  }
 
   render() {
     return (

@@ -12,6 +12,12 @@ const Container = styled(BaseContainer)`
   text-align: center;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
+
 const Users = styled.ul`
   list-style: none;
   padding-left: 0;
@@ -35,6 +41,11 @@ class Game extends React.Component {
   logout() {
     localStorage.removeItem("token");
     this.props.history.push("/login");
+  }
+
+  toProfile(userName) {
+    localStorage.setItem("userNameProfile", userName)
+    this.props.history.push(`/UserProfile`);
   }
 
   componentDidMount() {
@@ -73,6 +84,16 @@ class Game extends React.Component {
                 return (
                   <PlayerContainer key={user.id}>
                     <Player user={user} />
+                    <Container>
+                      <ButtonContainer>
+                        <Button
+                            width="100%"
+                            onClick={() => {
+                              this.toProfile(user.username);
+                            }}
+                        >{user.username}</Button>
+                      </ButtonContainer>
+                    </Container>
                   </PlayerContainer>
                 );
               })}

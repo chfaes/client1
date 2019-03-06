@@ -16,21 +16,11 @@ const UserName = styled.div`
   margin-left: 5px;
 `;
 
-const Password = styled.div`
-  font-weight: bold;
-  color: #06c4ff;
-`;
-
 const CurrDate = styled.div`
   font-weight: bold;
   color: #e6ca1f;
 `;
 
-const Id = styled.div`
-  margin-left: auto;
-  margin-right: 10px;
-  font-weight: bold;
-`;
 
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
@@ -40,16 +30,14 @@ const Id = styled.div`
  * https://reactjs.org/docs/components-and-props.html
  * @FunctionalComponent
  */
-const Player = ({ user }) => {
-  return (
-    <Container>
-      <Password>{user.password}</Password>
-      <UserName>{user.username}</UserName>
-      <CurrDate>{user.currdate}</CurrDate>
-      <CurrDate>{user.birthday}</CurrDate>
-      <Id>Id: {user.id}</Id>
-    </Container>
-  );
+const Profile = ({ user }) => {
+    return (
+        <Container>
+            <UserName>{user.username}</UserName>
+            <CurrDate>{user.currdate}</CurrDate>
+            <CurrDate>{user.birthday}</CurrDate>
+        </Container>
+    );
 };
 
-export default Player;
+export default Profile;

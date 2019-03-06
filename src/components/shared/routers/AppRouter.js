@@ -4,7 +4,9 @@ import { GameGuard } from "../routeProtectors/GameGuard";
 import GameRouter from "./GameRouter";
 import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
-import Testcomponent2 from "../../My Components/Testcomponent2";
+import Register from "../../My Components/Register";
+import UserProfile from "../../userprofile/UserProfile";
+import { UPGuard } from "../routeProtectors/UPGuard";
 
 /**
  * Main router of your application.
@@ -32,7 +34,16 @@ class AppRouter extends React.Component {
               <Route
                   path="/My Components"
                   render={() => (
-                          <Testcomponent2/>
+                          <Register/>
+                  )}
+              />
+              <Route
+                  path="/userprofile"
+                  exact
+                  render={() => (
+                      <UPGuard>
+                          <UserProfile />
+                      </UPGuard>
                   )}
               />
             <Route

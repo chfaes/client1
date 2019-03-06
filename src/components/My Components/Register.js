@@ -56,11 +56,11 @@ const ButtonContainer = styled.div`
   margin-top: 20px;
 `;
 
-class Testcomponent2 extends React.Component {
+class Register extends React.Component {
   constructor() {
     super();
     this.state = {
-      users: null
+      users: null,
     };
   }
 
@@ -78,12 +78,13 @@ class Testcomponent2 extends React.Component {
       })
     })
       .then(response => response.json())
-      .then(returnedUser => {
-        const user = new User(returnedUser);
-        // store the token into the local storage
-        localStorage.setItem("token", user.token);
-        // user login successfully worked --> navigate to the route /game in the GameRouter
-        //this.props.history.push(`/game`);
+      .then((res)=> {
+        if(res.status ===409){
+            window.alert("Username existiert bereits!");
+        }else{
+            window.alert("User erfolgreich registriert!");
+            this.props.history.push(`/login`);
+        }
       })
       .catch(err => {
         if (err.message.match(/Failed to fetch/)) {
@@ -135,8 +136,6 @@ class Testcomponent2 extends React.Component {
                     width="50%"
                     onClick={() => {
                       this.registerNewUser();
-                      window.alert("User erfolgreich registriert!")
-                      this.props.history.push(`/login`);
                     }}
                 >
                   Register
@@ -149,4 +148,4 @@ class Testcomponent2 extends React.Component {
   }
 }
 
-export default withRouter(Testcomponent2);
+export default withRouter(Register);
