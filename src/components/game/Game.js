@@ -6,6 +6,7 @@ import Player from "../../views/Player";
 import { Spinner } from "../../views/design/Spinner";
 import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
+import Profile from "../userprofile/UserProfile";
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -43,9 +44,11 @@ class Game extends React.Component {
     this.props.history.push("/login");
   }
 
-  toProfile(userName) {
-    localStorage.setItem("userNameProfile", userName)
-    this.props.history.push(`/UserProfile`);
+  toProfile(user) {
+    this.props.history.push({
+     pathname: `/UserProfile`,
+        state: {displayUser: user}
+    });
   }
 
   componentDidMount() {
@@ -89,7 +92,8 @@ class Game extends React.Component {
                         <Button
                             width="100%"
                             onClick={() => {
-                              this.toProfile(user.username);
+                                localStorage.setItem("userNameProfile", user.username)
+                              this.toProfile(user);
                             }}
                         >{user.username}</Button>
                       </ButtonContainer>

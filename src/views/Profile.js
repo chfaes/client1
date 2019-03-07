@@ -31,6 +31,9 @@ const CurrDate = styled.div`
  * @FunctionalComponent
  */
 const Profile = ({ user }) => {
+    if(localStorage.getItem("token")===user.token.toString()){
+
+    }
     return (
         <Container>
             <UserName>{user.username}</UserName>

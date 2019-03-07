@@ -4,7 +4,7 @@ import { BaseContainer } from "../../helpers/layout";
 import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
 import {getDomain} from "../../helpers/getDomain";
-import User from "../shared/models/User";
+//import User from "../shared/models/User";
 
 const FormContainer = styled.div`
   margin-top: 2em;
@@ -78,20 +78,16 @@ class Register extends React.Component {
       })
     })
       .then(response => response.json())
-      .then((res)=> {
-        if(res.status ===409){
-            window.alert("Username existiert bereits!");
+      .then((response2)=> {
+        if(response2.status ===409){
+            alert("Username existiert bereits!");
         }else{
-            window.alert("User erfolgreich registriert!");
+            alert("User erfolgreich registriert!");
             this.props.history.push(`/login`);
         }
       })
       .catch(err => {
-        if (err.message.match(/Failed to fetch/)) {
-          alert("The server cannot be reached. Did you start it?");
-        } else {
           alert(`Something went wrong during the login: ${err.message}`);
-        }
       });
   }
 

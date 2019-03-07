@@ -28,7 +28,8 @@ class UserProfile extends React.Component {
     constructor() {
         super();
         this.state = {
-            users: null
+            users: null,
+
         };
     }
 
@@ -36,58 +37,46 @@ class UserProfile extends React.Component {
         this.props.history.push(`/game`);
     }
 
-    componentDidMount() {
-        fetch(`${getDomain()}/users`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => response.json())
-            .then(async users => {
-                // delays continuous execution of an async operation for 0.8 seconds.
-                // This is just a fake async call, so that the spinner can be displayed
-                // feel free to remove it :)
-                await new Promise(resolve => setTimeout(resolve, 800));
-
-                this.setState({ users });
-            })
-            .catch(err => {
-                console.log(err);
-                alert("Something went wrong fetching the users: " + err);
-            });
-    }
-
     render() {
+        /*
+        this.state.users.map(user =>{
+            if (user.username === localStorage.getItem("userNameProfile")){
+                if(localStorage.getItem("token")===user.token.toString()){
+                    //User greift auf sein eigenes Profil zu
+
+                }else{
+
+                }
+            }
+        })*/
         return (
             <Container>
-                <h2>Profile </h2>
-                <p>::::::::::::::::::::::::::::::::</p>
-                {!this.state.users ? (
-                    <Spinner />
-                ) : (
+                <h2>Profile</h2>
+                <p>:::::::::::::::{this.props.location.state.displayUser.username.toString()}:::::::::::::::::</p>
                     <div>
                         <Users>
-                            {this.state.users.map(user => {
-                                return (
-                                    <PlayerContainer key={user.id}>
-                                        <Profile user={user} />
-                                        {localStorage.getItem("userNameProfile")}
-                                    </PlayerContainer>
-
-                                );
-                            })}
+                            <PlayerContainer key={this.props.location.state.displayUser.id}>
+                                <Profile user={this.props.location.state.displayUser}/>
+                            </PlayerContainer>
                         </Users>
                         <Button
-                            width="100%"
+                            width="40%"
                             onClick={() => {
                                 this.backToList();
                             }}
                         >
                             Back to user list
                         </Button>
+                        <Button
+
+                            width="40%"
+                            onClick={() => {
+                                this.backToList();
+                            }}
+                        >
+                            Edit Profile
+                        </Button>
                     </div>
-                )}
             </Container>
         );
     }
