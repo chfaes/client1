@@ -1,9 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { BaseContainer } from "../../helpers/layout";
-import { getDomain } from "../../helpers/getDomain";
 import Profile from "../../views/Profile";
-import { Spinner } from "../../views/design/Spinner";
 import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
 
@@ -29,8 +27,14 @@ class UserProfile extends React.Component {
         super();
         this.state = {
             users: null,
-
+            isSameUser: false,
         };
+    }
+    goToEdit(user){
+        this.props.history.push({
+            pathname: `/EditProfile`,
+            state: {displayUser: user}
+        });
     }
 
     backToList() {
@@ -38,21 +42,12 @@ class UserProfile extends React.Component {
     }
 
     render() {
-        /*
-        this.state.users.map(user =>{
-            if (user.username === localStorage.getItem("userNameProfile")){
-                if(localStorage.getItem("token")===user.token.toString()){
-                    //User greift auf sein eigenes Profil zu
-
-                }else{
-
-                }
-            }
-        })*/
+        let isTHEUser = this.props.location.state.displayUser.token.toString()===localStorage.getItem("token").toString();
+        let user =this.props.location.state.displayUser;
         return (
             <Container>
                 <h2>Profile</h2>
-                <p>:::::::::::::::{this.props.location.state.displayUser.username.toString()}:::::::::::::::::</p>
+                <p>:::::::::::::::{this.props.location.state.displayUser.username}:::::::::::::::::</p>
                     <div>
                         <Users>
                             <PlayerContainer key={this.props.location.state.displayUser.id}>
@@ -68,10 +63,10 @@ class UserProfile extends React.Component {
                             Back to user list
                         </Button>
                         <Button
-
+                            disabled={!isTHEUser}
                             width="40%"
                             onClick={() => {
-                                this.backToList();
+                                this.goToEdit(user);
                             }}
                         >
                             Edit Profile

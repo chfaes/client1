@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { BaseContainer } from "../../helpers/layout";
 import { getDomain } from "../../helpers/getDomain";
-import Player from "../../views/Player";
+//import Player from "../../views/Player";
 import { Spinner } from "../../views/design/Spinner";
 import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
-import Profile from "../userprofile/UserProfile";
+//import Profile from "../userprofile/UserProfile";
 
 const Container = styled(BaseContainer)`
   color: white;
@@ -76,7 +76,7 @@ class Game extends React.Component {
   render() {
     return (
       <Container>
-        <h2>Happy Coding! </h2>
+        <h2>You are logged in as {localStorage.getItem("loggedInAs")} </h2>
         <p>Get all users from secure end point:</p>
         {!this.state.users ? (
           <Spinner />
@@ -86,7 +86,6 @@ class Game extends React.Component {
               {this.state.users.map(user => {
                 return (
                   <PlayerContainer key={user.id}>
-                    <Player user={user} />
                     <Container>
                       <ButtonContainer>
                         <Button

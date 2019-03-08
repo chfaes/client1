@@ -6,7 +6,9 @@ import { LoginGuard } from "../routeProtectors/LoginGuard";
 import Login from "../../login/Login";
 import Register from "../../My Components/Register";
 import UserProfile from "../../userprofile/UserProfile";
+import EditProfile from "../../editProfile/EditProfile";
 import { UPGuard } from "../routeProtectors/UPGuard";
+import { EditUPGuard } from "../routeProtectors/EditUPGuard";
 
 /**
  * Main router of your application.
@@ -44,6 +46,15 @@ class AppRouter extends React.Component {
                       <UPGuard>
                           <UserProfile />
                       </UPGuard>
+                  )}
+              />
+              <Route
+                  path="/editProfile"
+                  exact
+                  render={() => (
+                      <EditUPGuard>
+                          <EditProfile />
+                      </EditUPGuard>
                   )}
               />
             <Route

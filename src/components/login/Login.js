@@ -110,6 +110,7 @@ class Login extends React.Component {
         }else{
           const user = new User(res);
           localStorage.setItem("token", user.token);
+          localStorage.setItem("loggedInAs", user.username);
           this.props.history.push(`/game`);
         }
       })
@@ -157,6 +158,7 @@ class Login extends React.Component {
             />
             <Label>Password</Label>
             <InputField
+              type="password"
               placeholder="Enter here.."
               onChange={e => {
                 this.handleInputChange("password", e.target.value);
