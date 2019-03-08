@@ -6,6 +6,7 @@ import { getDomain } from "../../helpers/getDomain";
 import { Spinner } from "../../views/design/Spinner";
 import { Button } from "../../views/design/Button";
 import { withRouter } from "react-router-dom";
+//import User from "../shared/models/User";
 //import Profile from "../userprofile/UserProfile";
 
 const Container = styled(BaseContainer)`
@@ -39,9 +40,35 @@ class Game extends React.Component {
     };
   }
 
-  logout() {
-    localStorage.removeItem("token");
-    this.props.history.push("/login");
+  logout(username) {
+      localStorage.removeItem("token");
+      fetch(`${getDomain()}/logout/${username}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+              username: this.state.username,
+              password: this.state.password,
+              birthday: "Blank",
+              currdate: "Blank",
+          })
+      })
+          .then(response => response.json())
+          .then(res => {
+              if(res.status ===409){
+                  window.alert("Username oder Passwort falsch!");
+              }else{
+                  this.props.history.push("/login");
+              }
+          })
+          .catch(err => {
+              if (err.message.match(/Failed to fetch/)) {
+                  alert("The server cannot be reached. Did you start it?");
+              } else {
+                  alert(`Something went wrong during the login: ${err.message}`);
+              }
+          });
   }
 
   toProfile(user) {
@@ -104,7 +131,7 @@ class Game extends React.Component {
             <Button
               width="100%"
               onClick={() => {
-                this.logout();
+                this.logout(localStorage.getItem("loggedInAs"));
               }}
             >
               Logout

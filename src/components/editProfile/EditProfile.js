@@ -123,13 +123,33 @@ class EditProfile extends React.Component {
                                 this.handleInputChange("username", e.target.value);
                             }}
                         />
-                        <Label>New Birthday</Label>
-                        <InputField
-                            placeholder={user.birthday}
-                            onChange={e => {
-                                this.handleInputChange("birthday", e.target.value);
-                            }}
-                        />
+                        <Label>Date of birth</Label>
+                        <form action="/action_page.php">
+                            <input
+                                type="date"
+                                name="birthdate"
+                                min="1900-01-01"
+                                max="2019-03-13"
+                                onChange={e => {
+                                    this.handleInputChange("birthday", e.target.value);
+                                }}
+
+                                {...() => {
+                                    let dd = this.today.getDate();
+                                    let mm = this.today.getMonth();
+                                    let yyyy = this.today.getFullYear();
+                                    if (dd < 10) {
+                                        dd = '0' + dd;
+                                    }
+                                    if (mm < 10) {
+                                        mm = '0' + mm;
+                                    }
+                                    let todayStr = dd + '.' + mm + '.' + yyyy;
+                                    document.getElementById("date").setAttribute("max", todayStr);
+                                }}
+                            />
+                        </form>
+                        <p/>
                         <ButtonContainer>
                             <OtherButton
                                 width="40%"

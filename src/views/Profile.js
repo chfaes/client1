@@ -21,6 +21,11 @@ const CurrDate = styled.div`
   color: #e6ca1f;
 `;
 
+const OtherStyle = styled.div`
+  font-weight: bold;
+  color: #16ca1f;
+`;
+
 
 /**
  * This is an example of a Functional and stateless component (View) in React. Functional components are not classes and thus don't handle internal state changes.
@@ -36,9 +41,10 @@ const Profile = ({ user }) => {
     }
     return (
         <Container>
-            <UserName>{user.username}</UserName>
-            <CurrDate>{user.currdate}</CurrDate>
-            <CurrDate>{user.birthday}</CurrDate>
+            <UserName>Username: {user.username}</UserName>
+            <CurrDate>Date of registration: {user.currdate}</CurrDate>
+            <CurrDate>Date of birth: {user.birthday}</CurrDate>
+            <OtherStyle>Status: {user.status}</OtherStyle>
         </Container>
     );
 };
