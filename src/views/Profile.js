@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { BaseContainer } from "../helpers/layout";
 
 const Container = styled.div`
   margin: 6px 0;
@@ -11,6 +12,30 @@ const Container = styled.div`
   border: 1px solid #ffffff26;
 `;
 
+const FormContainer = styled.div`
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 300px;
+  justify-content: center;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 375px;
+  font-size: 16px;
+  font-weight: 300;
+  padding-left: 37px;
+  padding-right: 37px;
+  border-radius: 5px;
+  background: linear-gradient(rgb(27, 124, 186), rgb(2, 46, 101));
+  transition: opacity 0.5s ease, transform 0.5s ease;
+`;
+
 const UserName = styled.div`
   font-weight: lighter;
   margin-left: 5px;
@@ -18,11 +43,13 @@ const UserName = styled.div`
 
 const CurrDate = styled.div`
   font-weight: bold;
+  margin-left: 5px;
   color: #e6ca1f;
 `;
 
 const OtherStyle = styled.div`
   font-weight: bold;
+  margin-left: 5px;
   color: #16ca1f;
 `;
 
@@ -40,12 +67,25 @@ const Profile = ({ user }) => {
 
     }
     return (
-        <Container>
-            <UserName>Username: {user.username}</UserName>
-            <CurrDate>Date of registration: {user.currdate}</CurrDate>
-            <CurrDate>Date of birth: {user.birthday}</CurrDate>
-            <OtherStyle>Status: {user.status}</OtherStyle>
-        </Container>
+        <BaseContainer>
+            <FormContainer>
+                <Form>
+                    <Container>
+                        <UserName>Username: {user.username}</UserName>
+                    </Container>
+                    <Container>
+                        <CurrDate>Date of registration: {user.currdate}</CurrDate>
+                    </Container>
+                    <Container>
+                        <CurrDate>Date of birth: {user.birthday}</CurrDate>
+                    </Container>
+                    <Container>
+                        <OtherStyle>Status: {user.status}</OtherStyle>
+                    </Container>
+
+                </Form>
+            </FormContainer>
+        </BaseContainer>
     );
 };
 

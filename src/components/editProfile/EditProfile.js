@@ -80,6 +80,26 @@ class EditProfile extends React.Component {
         });
     }
 
+    updateUserInfo(user){
+        fetch(`${getDomain()}/users/${user.id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+        }})
+            .then(res=>res.json())
+            .then(res =>{
+                if(res.status===404){
+                    window.alert("User Id (und damit der User) existiert nicht!");
+                }else{
+                    localStorage.setItem("loggedInAs", res.username)
+                    this.props.history.push({
+                        pathname: `/UserProfile`,
+                        state: {displayUser: res}
+                    });
+                }
+            })
+    }
+
     saveChanges(user){
         fetch(`${getDomain()}/users/${user.id}`, {
             method: "PUT",
@@ -93,16 +113,13 @@ class EditProfile extends React.Component {
                 birthday: this.state.birthday,
             })
         })
-            .then(response => response.json())
+            //.then(response => response.json())
             .then(res => {
                 if(res.status ===404){
                     window.alert("User Id (und damit der User) existiert nicht!");
                 }else{
-                    localStorage.setItem("loggedInAs", res.username)
-                    this.props.history.push({
-                        pathname: `/UserProfile`,
-                        state: {displayUser: res}
-                    });
+                    this.updateUserInfo(user);
+
                 }
             })
             .catch(err => {

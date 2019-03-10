@@ -40,9 +40,9 @@ class Game extends React.Component {
     };
   }
 
-  logout(username) {
+  logout(id) {
       localStorage.removeItem("token");
-      fetch(`${getDomain()}/logout/${username}`, {
+      fetch(`${getDomain()}/logout/${id}`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json"
@@ -131,7 +131,7 @@ class Game extends React.Component {
             <Button
               width="100%"
               onClick={() => {
-                this.logout(localStorage.getItem("loggedInAs"));
+                this.logout(localStorage.getItem("loggedInId"));
               }}
             >
               Logout
