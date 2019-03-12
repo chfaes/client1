@@ -63,9 +63,9 @@ const OtherStyle = styled.div`
  * @FunctionalComponent
  */
 const Profile = ({ user }) => {
-    if(localStorage.getItem("token")===user.token.toString()){
+    //if(localStorage.getItem("token")===user.token.toString()){
 
-    }
+    //}
     return (
         <BaseContainer>
             <FormContainer>

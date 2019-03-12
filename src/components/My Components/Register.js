@@ -65,6 +65,8 @@ class Register extends React.Component {
   }
 
   registerNewUser() {
+      /**Transmits the credentials to the backend. Backend checks whether Username exists already and throws a 409 in
+       * that case. Otherwise, it creates and returns the user.**/
     fetch(`${getDomain()}/users`, {
       method: "POST",
       headers: {
@@ -77,21 +79,22 @@ class Register extends React.Component {
         birthday: this.state.birthday
       })
     })
-      .then(response => response.json())
+      //.then(response => response.json())
       .then((response2)=> {
-        if(response2.status ===409){
-            alert("Username existiert bereits!");
-        }else{
+        if(response2.status ===201){
             alert("User erfolgreich registriert!");
             this.props.history.push(`/login`);
+        }else{
+            alert("Username existiert bereits (oder anderer Fehler)!");
         }
       })
       .catch(err => {
-          alert(`Something went wrong during the login: ${err.message}`);
+          alert(`Something went wrong during the registration: ${err.message}`);
       });
   }
 
   renderDate(){
+      /**Helper function to create the current date.**/
     return new Date().toLocaleString()
   }
 
@@ -101,16 +104,8 @@ class Register extends React.Component {
     this.setState({ [key]: value });
   }
   render() {
+      /**no restrictions on password or username except that they must not be empty**/
     return (
-        /*
-              <Label>Birthday</Label>
-              <InputField
-                  placeholder="Enter here.."
-                  onChange={e => {
-                    this.handleInputChange("birthday", e.target.value);
-                  }}
-              />
-              */
         <BaseContainer>
           <FormContainer>
             <Form>

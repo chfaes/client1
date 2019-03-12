@@ -87,10 +87,13 @@ class Login extends React.Component {
    * If the request is successful, a new user is returned to the front-end and its token is stored in the localStorage.
    */
   register(){
+    /**only meant to push to My Components (stupid name, but it works and I just kept building on top of it).**/
     this.props.history.push(`/My Components`);
   }
 
   login() {
+    /**this method transmits the username and password to the backend. There, the username and password are checked;
+    if they match, they return the respective user. If they don't, the backend throws a 409.**/
     fetch(`${getDomain()}/logcheck`, {
       method: "POST",
       headers: {

@@ -74,6 +74,7 @@ class EditProfile extends React.Component {
     }
 
     backToProfile(user){
+        /**Cancel-Button, back without saving anything.**/
         this.props.history.push({
             pathname: `/UserProfile`,
             state: {displayUser: user}
@@ -81,6 +82,8 @@ class EditProfile extends React.Component {
     }
 
     updateUserInfo(user){
+        /**Backend has updated the user. Now comes the GET method to update the user in the frontend. Automatically
+         * pushes to the UserProfile page with the now updated information (res).**/
         fetch(`${getDomain()}/users/${user.id}`, {
             method: "GET",
             headers: {
@@ -101,6 +104,7 @@ class EditProfile extends React.Component {
     }
 
     saveChanges(user){
+        /**passes new username and birthday to the backend. 404 should never occur. Backend returns no body.**/
         fetch(`${getDomain()}/users/${user.id}`, {
             method: "PUT",
             headers: {
@@ -123,11 +127,12 @@ class EditProfile extends React.Component {
                 }
             })
             .catch(err => {
-                alert(`Something went wrong during the login: ${err.message}`);
+                alert(`Something went wrong during data saving: ${err.message}`);
             });
     }
 
     render() {
+        /**May edit username and birthday.**/
         let user =this.props.location.state.displayUser;
         return (
             <BaseContainer>
@@ -177,6 +182,7 @@ class EditProfile extends React.Component {
                                 Cancel
                             </OtherButton>
                             <OtherButton
+                                disabled={!this.state.username}
                                 width="40%"
                                 onClick={() => {
                                     this.saveChanges(user);

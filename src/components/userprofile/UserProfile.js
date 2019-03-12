@@ -31,6 +31,7 @@ class UserProfile extends React.Component {
         };
     }
     goToEdit(user){
+        /**Again on step further, moving to the edit page while passing the reference to the user.**/
         this.props.history.push({
             pathname: `/EditProfile`,
             state: {displayUser: user}
@@ -42,6 +43,7 @@ class UserProfile extends React.Component {
     }
 
     render() {
+        /**isTHEUser checks whether we are on our own profile or not. Edit button becomes clickable if that's the case.**/
         let isTHEUser = this.props.location.state.displayUser.token.toString()===localStorage.getItem("token").toString();
         let user =this.props.location.state.displayUser;
         return (

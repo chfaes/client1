@@ -41,37 +41,35 @@ class Game extends React.Component {
   }
 
   logout(id) {
+      /**Transmits the id to the backend. The 404 should never occur, I just included it for completion's sake.**/
       localStorage.removeItem("token");
       fetch(`${getDomain()}/logout/${id}`, {
-          method: "POST",
+          method: "GET",
           headers: {
               "Content-Type": "application/json"
           },
-          body: JSON.stringify({
-              username: this.state.username,
-              password: this.state.password,
-              birthday: "Blank",
-              currdate: "Blank",
-          })
+          //body: JSON.stringify({
+          //    username: "Blank", //this.state.username,
+          //    password: "Blank", //this.state.password,
+          //    birthday: "Blank",
+          //    currdate: "Blank",
+          //})
       })
           .then(response => response.json())
           .then(res => {
-              if(res.status ===409){
-                  window.alert("Username oder Passwort falsch!");
+              if(res.status ===404){
+                  window.alert("User Id (und damit der User) existiert nicht!");
               }else{
                   this.props.history.push("/login");
               }
           })
           .catch(err => {
-              if (err.message.match(/Failed to fetch/)) {
-                  alert("The server cannot be reached. Did you start it?");
-              } else {
-                  alert(`Something went wrong during the login: ${err.message}`);
-              }
+                  alert(`Something went wrong during the logout: ${err.message}`);
           });
   }
 
   toProfile(user) {
+      /**as it says: Go to generic User Profile Page which is filled with information from 'user'.**/
     this.props.history.push({
      pathname: `/UserProfile`,
         state: {displayUser: user}
@@ -101,6 +99,7 @@ class Game extends React.Component {
   }
 
   render() {
+      /**Renders user names as buttons.**/
     return (
       <Container>
         <h2>You are logged in as {localStorage.getItem("loggedInAs")} </h2>
